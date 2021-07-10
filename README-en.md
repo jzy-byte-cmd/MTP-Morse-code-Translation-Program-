@@ -68,3 +68,6 @@ the program will be able to help you translate english into morse code!
 i have some ideas now,but i think it will take me some time to do it.
 
 and the English version will be online at the same time!
+
+
+## you are welcome to pull request or report bugs! thank you very much!
