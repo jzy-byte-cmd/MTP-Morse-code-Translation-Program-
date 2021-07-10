@@ -1,12 +1,16 @@
 # MTP(Morse code Translation)0.3 
 
-### What is MTP 0.3
+## What is MTP 0.3
+
+---
 
 MTP 0.3 is a program which can translate the morse code.
 
 and it is the third generation now.
 
-### How to use MTP 0.3
+## How to use MTP 0.3
+
+---
 
 well,it's very easy ,Although the instructions are chinese now.
 
@@ -31,7 +35,9 @@ second,input test.txt  press "enter"
 
 less than 1 second(probably),the translation was completed!
 
-### Cautions and tips
+## Cautions and tips
+
+---
 
 DO **not** input any other characters when you are inputing separator!
 
@@ -51,9 +57,13 @@ when you use space as the separator,if there is some space between the separator
 
 the translated characters will be sticked together,which means you need to distinguish them from each other by yourself.(and they will be capital.)
 
-### the next version? MTP 0.4
+## the next version? MTP 0.4
+
+---
 
 i would like to make the program can add space to each words,which means distinguish them automatically.
+
+the program will be able to help you translate english into morse code!
 
 i have some ideas now,but i think it will take me some time to do it.
 
