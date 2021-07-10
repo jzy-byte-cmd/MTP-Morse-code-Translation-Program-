@@ -33,6 +33,8 @@ first,input / press "enter"
 
 second,input test.txt  press "enter"
 
+third,input n and press "enter"
+
 less than 1 second(probably),the translation was completed!
 
 ## Cautions and tips
