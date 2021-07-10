@@ -59,6 +59,8 @@ when you use space as the separator,if there is some space between the separator
 
 the translated characters will be sticked together,which means you need to distinguish them from each other by yourself.(and they will be capital.)
 
+The file waiting to be translated should be placed in the same file with the Program.
+
 ## the next version? MTP 0.4
 
 ---
