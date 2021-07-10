@@ -41,3 +41,20 @@ if there is some space between the separator and the morse code, it will be OK! 
 
 if there is some characters between the separator and the morse code, well....,i think the translation will **go wrong**
 
+if you want to use enter as the separator, just input enter and press "enter" at the step 2.
+
+if you want to use space as the separator, input space\*\[numbers\]  and press "enter" at the step 2
+
+for example ,2 spaces as separator, input space\*2 and press "enter"
+
+when you use space as the separator,if there is some space between the separator and the morse code, it will be OK.(probably)
+
+the translated characters will be sticked together,which means you need to distinguish them from each other by yourself.(and they will be capital.)
+
+### the next version? MTP 0.4
+
+i would like to make the program can add space to each words,which means distinguish them automatically.
+
+i have some ideas now,but i think it will take me some time to do it.
+
+and the English version will be online at the same time!
