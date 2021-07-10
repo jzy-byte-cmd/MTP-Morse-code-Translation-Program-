@@ -67,3 +67,7 @@ Helloworld
 MTP 0.4 的翻译
 
 Hello world
+
+MTP 0.4 还会支持 将英文翻译为摩斯密码
+
+## 欢迎pull request 或者报告 漏洞  非常感谢！
