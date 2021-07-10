@@ -1,0 +1,21 @@
+#include <iostream>
+#include <windows.h>
+#include <iomanip>
+#include <math.h>
+#include <tchar.h>
+#include <fstream>
+#include <thread>
+#include <string>
+#include <vector>
+#include <map>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::cerr;
+using std::clog;
+using std::string;
+using std::fstream;
+using std::ios;
+using std::vector;
+using std::map;
