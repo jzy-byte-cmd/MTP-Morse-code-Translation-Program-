@@ -1,5 +1,9 @@
 # MTP(Morse code Translation)0.3 
 
+## How to compile？
+
+it is a console program now, you can compile it directly,and then run the program.
+
 ## What is MTP 0.3
 
 ---
