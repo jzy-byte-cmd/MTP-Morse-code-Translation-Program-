@@ -24,7 +24,7 @@ well,it's very easy ,Although the instructions are chinese now.
 2. after the first instructions were given,input the Separator. and press "enter"
 3. after the second instructions were given,input the file name which contains the Morse code needing to be translated.and press"enter".
 4. if you don't want to re-input the separator and  file name. input n  and press the enter. otherwise,input y,and press enter 
-and you will repeat step 1~3
+and you will repeat step 2~3
 5. the result will be demonstrated on the screen. and you can just kill the program after getting the result.
 
 #### an example
