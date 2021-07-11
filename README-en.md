@@ -30,8 +30,10 @@ and you will repeat step 2~3
 #### an example
 
 in the test.txt :
+
 ...././.-../.-../---/
---(test.txt end)
+
+(test.txt end)
 
 first,input / press "enter"
 
