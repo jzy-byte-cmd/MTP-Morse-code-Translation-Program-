@@ -1,51 +1,71 @@
-#include "heads.h"
+#include "heads.h"//common heads
 
 void input();
-void translator();//使用map进行翻译
-void select(string cutter,string information,int num_c,int num,int start);//递归筛选
+void translator();//use map to translate
+void select(string cutter,string information,int num_c,int num,int start);//recursion filtrate
 
 vector<string> target,translated;
 
 void input()
 {
-    bool control[5] = {true}; //嵌套控制变量    由小到大依次控制向深层的嵌套
+    bool control[5] = {true}; //the control variate,index from 0 to 5,the bigger the index is,the deeper loop it is
     fstream operate;
-    string cutter, file_name, asker;
-    while (control[0])
+    bool space=false;//the variate checks whether use space as separator
+    string cutter, file_name, asker;//cutter：contains separator. file_name:contains file name which has morse code in it 
+    while (control[0])                    //asker:contains the command inputed by user
     {
-        cout << "请输入分割符" << endl;
-        cout << "注:若要将空格作为分割符,请输入 space*[空格个数]" << endl;
-        cout << "例:若要 2个空格作为分隔符 则输入 space*2" << endl;
-        cout << "若要将回车作为分隔符,则输入enter" << endl;
-        cout << "请输入..." << endl;
+        cout<<"after you input the command,press enter to take the next step.."<<endl<<endl;
+        cout << "please input a separator" << endl;
+        cout << "comment:if you want to use spaces as the separator,input space*[number of space]" << endl;
+        cout << "example:,use 2 spaces as separator,input space*2" << endl;
+        cout << "if you want to use enter as the separator,input enter" << endl;
+        cout << "please input..." << endl;
         cin >> cutter;
-        cout << "请输入要读取的摩斯密码所在的文件名" << endl;
-        cout << "请输入..." << endl;
+        cout << "please input the file name that contains morse code(make sure it is in the same file with the program)" << endl;
+        cout << "please input..." << endl;
         cin >> file_name;
         control[1] = true;
-        if(cutter.compare("space*0")==0)//方式后面使用空格作为分隔符时发现 0个空格作为分隔符
+        if(cutter.find("space*")!=cutter.npos&&cutter.size()==7)//if might use space as separator.
         {
-            cout<<"space*0 不可取!"<<endl<<"请重新输入!"<<endl;
-            continue;
+            string check_space="space*";
+            for(int num=0;num<6;num++)
+            {
+                if(cutter[num]!=check_space[num])
+                {
+                    break;
+                }
+                if(num==5)
+                {
+                    space=true;
+                }
+            }
+            if(space==true)
+            {
+                if((int)cutter[6]-48==0)//if use space*0
+                {
+                    cout<<"space*0 is not applicable"<<endl<<"please re-input"<<endl;//N/A
+                    continue;
+                }
+            }
         }
         while (control[1])
         {
-            cout << "分隔符为" << endl
+            cout << "separator:" << endl
                  << cutter << endl
-                 << "文件名为:" << endl
+                 << "file name:" << endl
                  << file_name << endl
-                 << "是否重新输入?(y/n)" << endl;//再次询问
+                 << "re-input?(y/n)" << endl;//check 
             cin >> asker;
-            if (asker.compare("y") == 0)
+            if (asker.compare("y") == 0)//re -input
             {
-                cout << "您已选择重新输入" << endl
+                cout <<"you have chosen to re-input" << endl
                      << endl;
                 control[1] = false;
                 continue;
             }
             else
             {
-                if (asker.compare("n") == 0)
+                if (asker.compare("n") == 0)//check is over
                 {
                     control[0] = false;
                     control[1] = false;
@@ -53,41 +73,43 @@ void input()
                 }
                 else
                 {
-                    cout << "您的指令无效..." << endl;//指令无效重新输入
+                    cout << "command is invalid..." << endl;//invalid command
                     continue;
                 }
             }
         }
     }
     control[0] = true;
-    cout << "读取中..." << endl
+    cout << "reading..." << endl
          << endl;
     operate.open(file_name, ios::in);
-    if (operate.fail())
+    if (operate.fail())//if read fail
     {
-        cout << "读取文件失败!"<<endl<<"请检查文件名是否有误!"<<endl;
-        cout<<"文件名:"<<endl<<file_name<<endl;
-        cout<<"请再次输入文件名..."<<endl<<"请输入..."<<endl;
+        cout << "failed to read!" << endl
+             << "please check the file name!and make sure it is in the same file with this program" << endl;
+        cout << "file name:" << endl
+             << file_name << endl;
+        cout<<"re-input file name..."<<endl<<"please input..."<<endl;
         cin>>file_name;
         operate.open(file_name, ios::in);
-        if(operate.fail())
+        if(operate.fail())//fail again
         {
-            cout<<"文件名再次出错!"<<endl<<"正在退出程序..."<<endl;
+            cout<<"read failed again!"<<endl<<"exit..."<<endl;
             Sleep(3000);
             exit(-1);
         }
     }
-    if(cutter.compare("enter")!=0)
+    if(cutter.compare("enter")!=0)//use enter as separator
     {
-        string information;//文件内的莫斯密码以及其分隔符
+        string information;//the morse code with separator will be stored in this variate
         getline(operate,information);
         //cout<<information<<endl;//ok
         //cout<<information.size()<<endl;
-        if(cutter.find("space*")!=cutter.npos&&cutter.size()==7)
+        if(space==true)
         {
-            int nums=(int)cutter[6]-48;//获取要几个空格
+            int nums=(int)cutter[6]-48;//obtain the number of space
             cutter.clear();
-            for(int counter=0;counter<nums;counter++)//使用空格作为分隔符
+            for(int counter=0;counter<nums;counter++)//use space as separator
             {
                 cutter+=" ";
             }
@@ -96,8 +118,8 @@ void input()
         }
         else
         {
-            for(int counter=0;counter<information.size();counter++)//如果不使用空格作为分隔符 则清楚所有的空格
-            {
+            for(int counter=0;counter<information.size();counter++)//if the separator was not space,
+            {                           //eliminate all the spaces between morse code and separator
                 if(information[counter]==' ')
                 {
                     information.erase(counter,1);
@@ -113,9 +135,9 @@ void input()
             cout<<endl<<target[num]<<num<<endl;
         }
         */
-        for (int counter = 0; counter < target.size(); counter++) //即使使用空格作为分隔符 筛选后清除空格防止干扰翻译
-        {
-            //cout<<target[counter]<<target[counter].size()<<endl;
+        for (int counter = 0; counter < target.size(); counter++) //even if the separator was space,
+        {                  //eliminate the spaces in case of interfering with translation after being filtrated.
+            //cout<<target[counter]<<target[counter].size()<<endl;      
             for (int num = 0; num < target[counter].size(); num++)
             {
                 //cout<<num<<endl;
@@ -132,7 +154,7 @@ void input()
                 //cout << "0" << endl;
                 vector<string>::iterator it;
                 it = target.begin() + counter;
-                target.erase(it); //!!!在消去元素的同时 容器本身的大小也在变小 !!!2021 07 .06  0.00
+                target.erase(it); 
                 counter--;
             }
         }
@@ -142,12 +164,12 @@ void input()
             cout<<target[k]<<endl;
         }
         */
-        translator();
+        translator();//start translating
     }
     else
     {
         string information;
-        while(getline(operate,information))//若使用回车作为分隔符 直接getline 读取
+        while(getline(operate,information))//if the separator was enter,just getline
         {
             //cout<<information<<endl;
             target.push_back(information);
@@ -159,7 +181,7 @@ void input()
 
 void translator()
 {
-    map<string, string> morse_code = {
+    map<string, string> morse_code = {//morse code
         {".-", "A"}, {"-...", "B"}, {"-.-.", "C"}, 
         {"-..", "D"}, {".", "E"}, {"..-.", "F"}, 
         {"--.", "G"}, {"....", "H"}, {"..", "I"},
@@ -180,9 +202,9 @@ void translator()
         {"-.--.-",")"},{"...-..-","$"},{"....","&"},
         {".--.-.","@"},{".-.-.","AR"},{".-...","AS"},
         {"...-.-","SK"},{"-...-","BT"},{".-.-.-", "."}};
-    map<string,string>::iterator it;//迭代器
+    map<string,string>::iterator it;
 
-    for (int pos_T = 0; pos_T < target.size(); pos_T++)
+    for (int pos_T = 0; pos_T < target.size(); pos_T++)//search in morse code and print
     {
         it=morse_code.find(target[pos_T]);
         if(it!=morse_code.end())
@@ -197,14 +219,14 @@ void translator()
             }
             else
             {
-                cout<<endl<<"无法翻译:"<<endl<<target[pos_T]<<endl;
-                cout<<"请检查翻译内容是否有多加了空格的现象!"<<endl;
+                cout<<endl<<"can not translate:"<<endl<<target[pos_T]<<endl;
+                cout<<"please check whether there is more space!"<<endl;
             }
         }
     }
 }
 
-void select(string cutter, string information, int num_c, int num, int start)
+void select(string cutter, string information, int num_c, int num, int start)//recursion filtrate
 {
     /*
     cout << "cutter:" << endl
@@ -222,7 +244,7 @@ void select(string cutter, string information, int num_c, int num, int start)
     if (cutter[num_c] == information[num])
     {
         num_c++;
-        if (num_c == cutter.size()) //如果情况为真,则表明完整的分隔符被发现
+        if (num_c == cutter.size()) //if true ,then the complete separator was found
         {
             /*
             cout << "true!!" << endl
@@ -235,12 +257,12 @@ void select(string cutter, string information, int num_c, int num, int start)
               //  cout << information[start] << endl;
                 deliver += information[start];
             }
-            start += cutter.size();
+            start += cutter.size();//record the location of the separator
             /*
             cout << endl
                  << deliver << endl;
             */
-            target.push_back(deliver);
+            target.push_back(deliver);//push the morse code without separator into target
             deliver.clear();
             num++;
             if (num >= information.size())
